@@ -145,6 +145,7 @@ def makeplot( botrun1, botrun2, eotests, comp, **kwargs ):
     pylab.axvline(0,color="k")
     pylab.grid()
     pylab.xlim(-1.0,0.3)
+    pylab.gca().invert_yaxis()
     pylab.legend()
     pylab.title(kwargs)    
     pylab.show()
