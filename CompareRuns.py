@@ -138,7 +138,8 @@ def makeplot( botrun1, botrun2, eotests, comp ):
     pylab.axvline(0,color="k")
     pylab.grid()
     pylab.xlim(-1.0,0.3)
-    pylab.legend()    
+    pylab.legend()
+    pylab.show()
     pylab.savefig("plot{}-{}.png".format(botrun1,botrun2))
     
 def run(botrun1, botrun2):
