@@ -60,7 +60,7 @@ def compare2runs( botrun1, botrun2 ):
     comp = {}
 
     for eotest in eotests:
-        print(eotest)
+#        print(eotest)
         results1_e2v = []
         for raft in included_e2v:
             for sensor in botresults1[eotest][raft].keys():
