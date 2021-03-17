@@ -144,7 +144,7 @@ def makeplot( botrun1, botrun2, eotests, comp, **kwargs ):
     pylab.xlabel("({}-{})/{}".format(botrun1,botrun2,botrun1))
     pylab.axvline(0,color="k")
     pylab.grid()
-    pylab.xlim(-1.0,0.3)
+    pylab.xlim(-1.0,1.0)
     pylab.gca().invert_yaxis()
     pylab.legend()
     pylab.title(kwargs)    
