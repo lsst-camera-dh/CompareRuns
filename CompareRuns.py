@@ -153,4 +153,6 @@ def makeplot( botrun1, botrun2, eotests, comp, **kwargs ):
     
 def run(botrun1, botrun2, **kwargs ):
     eotests, comp=compare2runs( botrun1, botrun2 )
+    print("https://srs.slac.stanford.edu/BOT_EO_Reports/{}/".format(botrun1))
+    print("https://srs.slac.stanford.edu/BOT_EO_Reports/{}/".format(botrun2))
     makeplot( botrun1, botrun2, eotests, comp, **kwargs )
