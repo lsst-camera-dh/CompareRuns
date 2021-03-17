@@ -103,7 +103,11 @@ def compare2runs( botrun1, botrun2 ):
             flag = ''
             if np.abs(m2-m1) > 2*np.sqrt(s1**2 + s2**2):
                 flag = ' <--'
-            print(eotest.ljust(25, ' ') + '%9.2e %8.1e %9.2e %8.1e' % (comp[eotest][kind][0], comp[eotest][kind][1], comp[eotest][kind][2], comp[eotest][kind][3]) + flag)
+            print(eotest.ljust(25, ' ') + '%9.2e %8.1e %9.2e %8.1e' % (
+                comp[eotest][kind][0],
+                comp[eotest][kind][1],
+                comp[eotest][kind][2],
+                comp[eotest][kind][3]) + flag)
 
     print(' ')
     outstr = ''
@@ -117,11 +121,14 @@ def compare2runs( botrun1, botrun2 ):
     return eotests, comp
 
 
-def makeplot( botrun1, botrun2, eotests, comp ):
+def makeplot( botrun1, botrun2, eotests, comp, **kwargs ):
     tablearr = []
     for kind in ['e2v', 'ITL']:
         tablearr.append(
-            ( Table( [ eotests, *[ [ comp[eotest][kind][i] for eotest in eotests ] for i in range(4) ] ] ), kind )
+            ( Table( [
+                eotests,
+                *[ [ comp[eotest][kind][i] for eotest in eotests ] for i in range(4) ]
+            ] ), kind )
         )
     fig, axs = pylab.subplots(1,1,figsize=(5,8),dpi=150,sharex=True)
     #pylab.errorbar( range(len(e2v["col1"])), y=e2v["col2"], yerr=e2v["col3"] )
@@ -139,9 +146,10 @@ def makeplot( botrun1, botrun2, eotests, comp ):
     pylab.grid()
     pylab.xlim(-1.0,0.3)
     pylab.legend()
+    pylab.title(kwargs)    
     pylab.show()
     pylab.savefig("plot{}-{}.png".format(botrun1,botrun2))
     
-def run(botrun1, botrun2):
+def run(botrun1, botrun2, **kwargs ):
     eotests, comp=compare2runs( botrun1, botrun2 )
-    makeplot( botrun1, botrun2, eotests, comp )
+    makeplot( botrun1, botrun2, eotests, comp, **kwargs )
