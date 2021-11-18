@@ -22,9 +22,9 @@ raft_types['Corner'] = 'R00 R04 R40 R44'.split()
 EO = get_EO_analysis_results(db='Prod')
 
 def compare2runs( botrun1, botrun2 ):
-    dev_list1, data1 = EO.get_tests(site_type='I&T-Raft', run=botrun1)
+    dev_list1, data1 = EO.get_tests(site_type='I&T-BOT', run=botrun1)
     botresults1 = EO.get_all_results(data1)
-    dev_list2, data2 = EO.get_tests(site_type='I&T-Raft', run=botrun2)
+    dev_list2, data2 = EO.get_tests(site_type='I&T-BOT', run=botrun2)
     botresults2 = EO.get_all_results(data2)
 
     fplist1 = list(botresults1['read_noise'].keys())  # get the list of rafts [assume that at least read_noise is available
@@ -81,6 +81,7 @@ def compare2runs( botrun1, botrun2 ):
         results1_ITL = np.array(results1_ITL)
         results2_e2v = np.array(results2_e2v)
         results2_ITL = np.array(results2_ITL)
+        print(results2_e2v, results2_ITL)
         temp = {}
         if eotest == 'tearing_detections':
             temp['e2v'] = (np.sum(results1_e2v), 0, np.sum(results2_e2v), 0)
@@ -130,7 +131,7 @@ def makeplot( botrun1, botrun2, eotests, comp, **kwargs ):
                 *[ [ comp[eotest][kind][i] for eotest in eotests ] for i in range(4) ]
             ] ), kind )
         )
-    fig, axs = pylab.subplots(1,1,figsize=(5,8),dpi=150,sharex=True)
+    fig, axs = pylab.subplots(1,1,figsize=(5,8),dpi=150,sharex=True,facecolor="white")
     #pylab.errorbar( range(len(e2v["col1"])), y=e2v["col2"], yerr=e2v["col3"] )
     x =numpy.arange(len(tablearr[0][0]["col1"]))
     for i, k  in enumerate(tablearr):
@@ -141,7 +142,7 @@ def makeplot( botrun1, botrun2, eotests, comp, **kwargs ):
                    fmt="o", label=label
                   )
     pylab.yticks(x,data["col0"])
-    pylab.xlabel("({}-{})/{}".format(botrun1,botrun2,botrun1))
+    pylab.xlabel("({}-{})/{}".format(botrun2,botrun1,botrun1))
     pylab.axvline(0,color="k")
     pylab.grid()
     pylab.xlim(-1.0,1.0)
