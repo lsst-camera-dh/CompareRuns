@@ -81,7 +81,6 @@ def compare2runs( botrun1, botrun2 ):
         results1_ITL = np.array(results1_ITL)
         results2_e2v = np.array(results2_e2v)
         results2_ITL = np.array(results2_ITL)
-        print(results2_e2v, results2_ITL)
         temp = {}
         if eotest == 'tearing_detections':
             temp['e2v'] = (np.sum(results1_e2v), 0, np.sum(results2_e2v), 0)
